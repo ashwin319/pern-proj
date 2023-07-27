@@ -37,7 +37,12 @@ app.get('/health', (req, res) => {
 
 // ROUTER: /api/autos
 const autosRouter = require('./api/autos');
+const { StatusCodes } = require('http-status-codes');
 app.use('/api/autos', autosRouter);
+
+app.use((error, req, res, next) => {
+    res.status(StatusCodes.BAD_REQUEST).send(`Bad request: ${error}`)
+})
 
 // listen for requests
 app.listen(PORT, () => {

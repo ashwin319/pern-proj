@@ -43,6 +43,7 @@ router.post('/', async (req, res, next) => {
 
         res.send(auto);
     } catch (error) {
+        // res.status(StatusCodes.BAD_REQUEST).send(`Bad Request. Try again.`)
         next(error);
     }
 });

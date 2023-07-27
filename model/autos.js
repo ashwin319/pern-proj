@@ -15,8 +15,17 @@ const getAutoById = async (id) => {
     return result;
 };
 
-const createAuto = () => {
-
+const createAuto = async ({ year, brand, model }) => {
+    try {
+        const result = await Auto.create({
+            year,
+            brand,
+            model
+        });
+        return result;    
+    } catch (error) {
+        throw error;
+    }
 };
 
 const updateAuto = () => {
