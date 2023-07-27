@@ -20,7 +20,8 @@ const Auto = sequelizeConn.define('auto', {
         allowNull: false
     }
 }, {
-    timestamps: false
+    timestamps: true,
+    underscored: true 
 });
 
 module.exports = Auto;

@@ -33,8 +33,8 @@ async function getAutoById(id) {
 async function createAuto({ year, brand, model }) {
     try {
         const { rows: [auto] } = await client.query(`
-            INSERT INTO autos(year, brand, model)
-            VALUES ($1, $2, $3);
+            INSERT INTO autos(year, brand, model, created_at)
+            VALUES ($1, $2, $3, NOW());
             `, [year, brand, model]);
 
         return auto;

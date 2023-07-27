@@ -28,12 +28,42 @@ const createAuto = async ({ year, brand, model }) => {
     }
 };
 
-const updateAuto = () => {
+const updateAuto = async ({ id, year, brand, model }) => {
+    try {
+        const auto = await getAutoById(id);
 
+        if (!auto || auto.length === 0 ) {
+            throw new Error(`Unable to find auto with ID: ${id}`)
+        }
+
+        await Auto.update({
+            year, brand, model
+        }, {
+            where: {
+                id
+            }
+        });
+
+        return await getAutoById(id);
+    } catch (err) {
+        throw err;
+    }
 };
 
-const deleteAuto = () => {
+const deleteAuto = async (id) => {
+    const autoToDelete = await getAutoById(id);
 
+    if (!autoToDelete || autoToDelete.length === 0) {
+        throw new Error(`Could not find an auto with the ID ${id} to delete`);
+    }
+
+    await Auto.destroy({
+        where: {
+            id
+        }
+    })
+
+    return autoToDelete[0];
 };
 
 module.exports = {
